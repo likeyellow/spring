@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.TodoMapper">
+<!-- 	<select id="getTime" resultType="String">
+		select now()
+	</select> -->
+<insert id="create">
+insert into tbl_todo(title,content) values(#{title},#{content})
+</insert>	
+
+
+<select id="read" resultType="org.zerock.domain.TodoVO">
+select * from tbl_todo where tno=#{tno}
+</select>
+
+<update id="update">
+update tbl_todo set title=#{title}, content=#{content} where tno=#{tno}
+</update>
+
+<delete id="delete">
+delete from tbl_todo where tno=#{tno}
+</delete>
+</mapper>   
