@@ -13,19 +13,34 @@
 
 	<security:authentication-manager>
 		<security:authentication-provider>
+			<!-- user-service-ref="customUserService"> -->
 			<security:password-encoder
 				ref="sampleEncoder" />
+
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
-				users-by-username-query="select uid, upw, 'true' from tbl_member_secu where uid=?"
-				authorities-by-username-query="select uid, if(grade = 'A', 'ROLE_ADMIN','ROLE_USER') grade
-from tbl_member_secu where uid =?" />
+				users-by-username-query="select 
+				uid, upw, 'true' from tbl_member_secu where uid=?"
+				authorities-by-username-query="select 
+				uid, if(grade = 'A', 'ROLE_ADMIN','ROLE_USER') grade from tbl_member_secu 
+				where uid =?" />
 
 			<!-- <security:user-service> <security:user name="admin" password="admin" 
 				authorities="ROLE_ADMIN" /> </security:user-service> -->
+
 		</security:authentication-provider>
 	</security:authentication-manager>
 
+
+
+	<!-- <bean id="customUserService" class="org.zerock.security.CustomUserDetailsService"></bean> -->
+
+
 	<bean id="sampleEncoder"
-		class="org.springframework.security.crypto.password.NoOpPasswordEncoder"></bean>
+		class="org.springframework.security.crypto.password.NoOpPasswordEncoder">
+		<!-- class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"> -->
+		<!-- class="org.springframework.security.crypto.password.NoOpPasswordEncoder"> -->
+
+
+	</bean>
 </beans>
