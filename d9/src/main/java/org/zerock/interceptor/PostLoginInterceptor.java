@@ -1,5 +1,6 @@
 package org.zerock.interceptor;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +22,14 @@ public class PostLoginInterceptor extends HandlerInterceptorAdapter {
 		MemberVO vo = (MemberVO)loginResult;
 		
 		request.getSession().setAttribute("member", vo);
+		
+		Cookie loginCookie = new Cookie("login",
+				request.getSession().getId());
+		
+		loginCookie.setPath("/");
+		loginCookie.setMaxAge(60*60*24*7);
+		
+		response.addCookie(loginCookie);
 		
 	}
 
