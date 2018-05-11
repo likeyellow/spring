@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-   
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,9 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>ADMIN PAGE TEST</h1>
-
-<h2><sec:authentication
-	 property="principal.username"/></h2> 
+	<form method="post" action="/sample/input">
+		<input type='text' name='s1' value='TTTTest' />
+		<sec:csrfInput/>
+		<button>Submit</button>
+	</form>
 </body>
 </html>

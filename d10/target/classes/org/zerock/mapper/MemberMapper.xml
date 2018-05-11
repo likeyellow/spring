@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.MemberMapper">
+
+	<resultMap type="org.zerock.domain.MemberVO" id="memberMap">
+		<id property="uid" column="uid" />
+		<result property="upw" column="upw" />
+		<result property="uname" column="uname" />
+		<collection property="authList" resultMap="authMap"></collection>
+		<!-- 루프를 돈다 -->
+	</resultMap>
+	<resultMap type="org.zerock.domain.MemberAuthVO" id="authMap">
+		<result property="uid" column="uid"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+
+	<select id="read" resultMap="memberMap">
+
+		select m.uid, upw, uname,auth
+		from tbl_member_secu m inner join tbl_member_auth auth
+		on m.uid = auth.uid
+		where m.uid= #{uid}
+
+	</select>
+</mapper>
