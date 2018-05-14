@@ -22,7 +22,7 @@
 		<property name="driverClassName"
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl"
-			value="jdbc:log4jdbc:mysql://10.10.10.14:3306/jr01?useSSL=false"></property>
+			value="jdbc:log4jdbc:mysql://10.10.10.36:3306/jr01?useSSL=false"></property>
 		<property name="username" value="study"></property>
 		<property name="password" value="study"></property>
 		<property name="minimumIdle" value="3"></property>
