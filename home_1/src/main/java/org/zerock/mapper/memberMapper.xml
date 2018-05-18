@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
+<!--  	이 Mapper 대신 
+			src/main/resources/mappers 에 있는 BoardMapper.xml 와
+			org.zerock.persistence/BoardMapper.java(<<인터페이스임) 
+			 사용함
+ -->
 <mapper namespace="org.zerock.mapper.memberMapper">
 
 	<select id="getTime" resultType="string">
@@ -19,5 +25,8 @@
 		select * from tbl_member3 where userid = #{userid}
 	</select>
 	
-	<
+	<select id="readWithPW"
+		resultType="org.zerock.domain.MemberVO">
+		select * from tbl_member3 where = #{userid} and userpw = #{userpw}
+		</select>
 </mapper>				

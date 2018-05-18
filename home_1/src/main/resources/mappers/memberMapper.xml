@@ -21,4 +21,6 @@
 	<select id="readWithPW" resultType="org.zerock.domain.MemberVO">
 	select * from tbl_member3 where userid = #{userid} and userpw = #{userpw}
 	</select>
+	
+	
 </mapper>	
