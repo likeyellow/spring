@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
+import org.zerock.domain.SearchCriteria;
 import org.zerock.persistence.BoardMapper;
 
 import lombok.Setter;
@@ -79,5 +80,29 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
 		
 		return mapper.listCriteria(cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		
+		return mapper.countPaging(cri);
+	}
+
+	@Override
+	public int listCountCriteria(Criteria cri) throws Exception {
+		
+		return mapper.countPaging(cri);
+	}
+
+	@Override
+	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception {
+		
+		return mapper.listSearch(cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		
+		return mapper.listSearchCount(cri);
 	}
 }

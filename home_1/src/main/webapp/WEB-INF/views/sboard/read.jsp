@@ -53,12 +53,12 @@ input{
 </head>
 <body>
 <form role="form" action="modify" method="post"> 
-
-
-		<input type='hidden' name='bno' value="${bo.bno}"> 
+		<input type='hidden' name='bno' value="${bo.bno}">
 		<input type='hidden' name='page' value="${cri.page}"> 
 		<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
- </form> 
+		<input type='hidden' name='searchType' value="${cri.searchType}">
+		<input type='hidden' name='keyword' value="${cri.keyword}">
+ </form>
 
  <form role="form" method="post"> 
 	<div class="box-header">
@@ -102,19 +102,21 @@ input{
 			console.log(formObj);
 
 			$(".btn btn-warining modifyBtn").on("click", function() {
-				formObj.attr("action", "/board/modify");
+				formObj.attr("action", "/sboard/modify");
 				formObj.attr("method", "get");
 				formObj.submit();
 			});
 
 			$(".btn btn-danger removeBtn").on("click", function() {
-				formObj.attr("action", "/board/remove");
+				formObj.attr("action", "/sboard/remove");
 				formObj.submit();
 			});
 
 			$(".btn btn-primary goListBtn").on("click", function() {
-				self.location = "/board/listCri";
-				
+				/* self.location = "/sboard/list"; */
+				formObj.attr("method", "get");
+				formObj.attr("action", "/sboard/list");
+				formObj.submit();
 			});
 		});
 	</script>

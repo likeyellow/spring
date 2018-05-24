@@ -3,6 +3,7 @@ package org.zerock.persistence;
 import java.util.List;
 
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 import org.zerock.domain.MemberVO;
 
 public interface BoardDAO {
@@ -18,5 +19,7 @@ public interface BoardDAO {
 	public List<BoardVO> listAll() throws Exception;	// 화면상에 데이터의 모든 목록을 보여주는 기능
 
 	public MemberVO getUserName() throws Exception;
+	
+	
 	
 }

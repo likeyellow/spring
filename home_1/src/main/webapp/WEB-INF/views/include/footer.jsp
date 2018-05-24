@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
 <script type="text/javascript" src="/resources/throughout/jquery/jquery.slidertron-0.1.js"></script>
 <link href="/resources/throughout/css/style.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="/resources/throughout/css/slidertron.css" rel="stylesheet" type="text/css" media="screen" />

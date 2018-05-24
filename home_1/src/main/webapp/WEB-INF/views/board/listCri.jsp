@@ -13,29 +13,54 @@
 	type="text/css" media="screen" />
 <link href="/resources/throughout/css/style.css" rel="stylesheet"
 	type="text/css" media="screen" />
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+
 <script src="jquery-3.3.1.min.js"></script>
-<!-- <style type="text/css"> -->
+<!-- <style type="text/css"> 이렇게 쓰면 error 발생-->
+
 <style>
 .tbl_board {
-	float: center;
+	/* position: absolute;
+	top: 165px;
+	left: 171px; 
+	float : center;  */
 	background-position: center;
 	background-color: black;
 	font-family: Arial, Helvetica, sans-serif;
 	text-align: justify;
 	border: 2px double grey;
 	border-radius: 15px;
-	margin: 10px auto;
+	margin: 15px auto;
 	padding: 10px 40px 50px 40px;
 	width: 940px;
+	height: 440px;
 }
 
 .tbl_board tr {
-	position: relative;
+	/* position: relative; */
 	text-align: center;
 }
 
 .tbl_board th {
-	float: justiry;
+	float: justify;
 	height: 32px;
 	padding: 10px 20px 0px 20px;
 	letter-spacing: -1px;
@@ -46,6 +71,17 @@
 	font-size: 18px;
 	font-weight: normal;
 	color: #FFFFFF;
+}
+
+.pagination li {
+	color: blue;
+	float: justify;
+	height: 32px;
+	text-align: center;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 25px;
+	display: inline;
 }
 </style>
 <title>ListALL Page Test</title>
@@ -65,26 +101,58 @@
 
 			<tr>
 				<td>${BoardVO.bno}</td>
-				<td><a href='/board/read?bno=${bno}'>${BoardVO.title}</a></td>
+				<td><a
+					href='/board/read${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${BoardVO.bno}'>
+						${BoardVO.title}</a></td>
 				<td>${BoardVO.writer}</td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 						value="${BoardVO.regdate}" /></td>
 				<td><span class="badge bg-red">${BoardVO.viewcnt}</span>
-				
-				
 		</c:forEach>
-	<!-- </tr> -->
-	
-	
-		<tr> 
-			<div class="text-center">
+		</tr>
+
+
+		<tr>
+			<td colspan="5">
+				<div class="text-center">
+					<ul class="pagination">
+
+						<c:if test="${pageMaker.prev}">
+							<li><a
+								href="listCri${pageMaker.makeQuery(pageMaker.startPage -1) }">&laquo;</a>
+							</li>
+						</c:if>
+				<%-- 		<c:forEach items="${listall}" var="BoardVO"> --%>
+						<c:forEach begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage}" var="idx">
+							
+								<li
+									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+									<a href="listCri${pageMaker.makeQuery(idx)}">${idx}</a>
+								</li>
+							</c:forEach>
+
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li><a
+									href="listCri${pageMaker.makeQuery(pageMaker.endPage +1)}">&raquo;</a>
+								</li>
+							</c:if>
+						<%--  </c:forEach>  --%>
+					</ul>
+				</div>
+			</td>
+		</tr>
+
+
+		<!-- <tr> 
+			<div class="text-center"> 
 			<ul class="pagination">
 					<li>&laquo;</li>
 					<li>.........</li>
 					<li>&raquo;</li>
 			 	</ul> 
-			</div>
-		</tr>
+		 	</div> 
+		</tr> -->
 	</table>
 
 	<div id="slideshow">

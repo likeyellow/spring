@@ -14,13 +14,18 @@
 <link href="/resources/throughout/css/slidertron.css" rel="stylesheet" type="text/css" media="screen" />
 
 <style type="text/css">
-@import "slidertron.css";
+@import "/resources/throughout/css/slidertron.css";
 </style>
 
 </head>
 <body>
 
 <body>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
 <div id="logo">
 	<h1><a href="#">Throughout </a></h1>
 	<p><em> Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a></em></p>
