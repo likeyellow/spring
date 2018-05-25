@@ -12,7 +12,7 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	color: #919191;
-	background-color: lightgreen;
+	background-color: black;
 }
 
 h1, h2, h3 {
@@ -133,7 +133,17 @@ hr { display: none; }
 }
 /* Search */
 
+.box-body{
+	display: inline-block;		
+	color: grey;
+	height: 22px;
+}
+.search{
+	display: inline-block;
+	color: grey;
+}
 #search {
+	display: inline-block;
 	float: right;
 	padding: 10px 10px 0px 0px;
 }
@@ -265,8 +275,9 @@ hr { display: none; }
 	display: block;
 	z-index: 100;
 	width: 940px;
-	height: 780px;
+	height: 580px;
 	margin: 0 auto;
+	padding: 20px 20px;
 	background-color: black;
 	float: center;
 }

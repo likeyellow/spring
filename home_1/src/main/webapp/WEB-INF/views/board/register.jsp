@@ -8,9 +8,16 @@
 <link href="/resources/throughout/css/style.css" rel="stylesheet" type="text/css" media="screen" />
 
 <title>Insert title here</title>
+<style>
+body{
+	background-color: black;
+}
+
+
+</style>
 </head>
 <body>
-<h1>등록페이지 테스트 중</h1>
+<h1 style="color: white">등록페이지 테스트 중</h1>
 <form role="form" method="post">
 <div class="box_body">
 <div class="form-group">

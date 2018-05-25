@@ -32,6 +32,7 @@ public class SearchBoardController {
 		//model.addAttribute("list", mapper.listCriteria(cri));
 		
 		model.addAttribute("list", mapper.listSearch(cri));
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		

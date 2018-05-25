@@ -1,15 +1,36 @@
-
+body{
+	background: #4C9BCD;
+}
 #slideshow {
-	width: 940px;
-	height: 393px;
-	margin: 0px 10px;
-	padding: 57px 0px 0px 0px;
-	background: url(/resources/throughout/images/img03.jpg) no-repeat left top;
+	width: 730px;
+	height: 450px;
+	margin: 20px auto;
+	padding: 10px 10px 10px 10px;
+	background: url(/resources/throughout/images/img03.jpg) no-repeat center center center center; 
+	float: center;
+	/* position: relative; */
 }
-
-#foobar {
+.slide {
 	position: relative;
+	float: center;
+	top: auto;
+	bottom : 30px;
+	width: auto;
+	/* padding: 10px 10px; */
 }
+img {
+	position: absolute;
+	float: center;
+	width: auto;
+	top: auto;
+}
+/* #foobar {
+	position: relative;
+} */
+
+/* .next{
+	position: absolute;
+} */
 
 #foobar .navigation {
 	position: absolute;
@@ -18,9 +39,9 @@
 	color: #ffffff;
 	bottom: 0px;
 	right: 0px;
-	margin: 10px;
+	margin: 110px;
 	padding: 10px;
-	background-color: #303030;
+	background-color:  #303030;
 	opacity: 0.75;
 }
 
@@ -55,7 +76,7 @@
 }
 
 
-#foobar .viewer-wrapper {
+/* #foobar .viewer-wrapper {
 	float: left;
 	width: 726px;
 	height: 336px;
@@ -72,32 +93,38 @@
 	background: green;
 	width: 100px;
 	float: right;
+}  */
+<!-- slideShow ½ÃÀÛ-->
+ #col1 {
+ 	display: inline-block;
+	width: 107px; 
+	float: left;
+	/* position: relative; */
 }
-
-#col1 {
-	width: 107px;
+ 
+#col1 a {
+	outline: none;
+	display: inline-block;
+	width: 77px;
+	height: 210px;
+	background: url(/resources/throughout/images/img05.jpg) no-repeat 30px 130px;
+	text-decoration: none;
+	position: absolute;
 	float: left;
 }
 
-#col1 a {
-	outline: none;
-	display: block;
-	width: 77px;
-	height: 206px;
-	background: url(/resources/throughout/images/img05.jpg) no-repeat 30px 130px;
-	text-decoration: none;
-}
-
 #col2 {
+	position: absolute;
+/* 	top: 30px auto; */
 	float: left;
 	width: 733px;
 }
 
 #col3 a {
-	float: right;
+	float: left;
 	outline: none;
 	width: 87px;
-	height: 206px;
-	background: url(/resources/throughout/images/img06.jpg) no-repeat 10px 130px;
+	height: 210px;
+	background: url(/resources/throughout/images/img06.jpg) no-repeat 10px 170px;
 	text-decoration: none;
 }

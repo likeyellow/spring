@@ -22,8 +22,7 @@
 	</select>
 
 	<update id="update">
-		update tbl_board3 set title = #{title}, content =
-		#{content}
+		update tbl_board3 set title = #{title}, content = #{content}
 		where bno = #{bno}
 	</update>
 
@@ -67,7 +66,34 @@
  	
  	<select id="listSearch" resultType="org.zerock.domain.BoardVO">
  	<![CDATA[
- 		select * from tbl_board3 where bno > 0 order by bno desc
+ 		select * from tbl_board3 where bno > 0 
+ 	]]>
+ 		
+ 		<if test="searchType != null">
+ 		<if test="searchType =='t'.toString()">
+ 			and title like CONCAT('%', #{keyword}, '%')
+ 		</if>
+ 		<if test="searchType == 'c'.toString()">
+ 			and content like CONCAT('%', #{keyword}, '%')
+ 		</if>
+ 		<if test="searchType == 'w'.toString()">
+ 			and writer like CONCAT('%', #{keyword}, '%')
+ 		</if>
+ 		<if test="searchType == 'tc'.toString()">
+ 			and ( title like CONCAT('%', #{keyword}, '%') OR content like CONCAT('%',#{keyword},'%'))
+ 		</if>
+ 		<if test="searchType == 'cw'.toString()">
+ 			and ( content like CONCAT('%', #{keyword}, '%') OR writer like CONCAT('%', #{keyword}, '%'))
+ 		</if>
+ 		<if test="searchType == 'tcw'.toString()">
+ 			and ( title like CONCAT('%', #{keyword}, '%') OR 
+ 			content like CONCAT('%', #{keyword}, '%') OR
+ 			writer like CONCAT('%', #{keyword}, '%'))
+ 		</if>
+ 	</if>
+ 		
+<![CDATA[ 		
+ 		order by bno desc
  		limit #{pageStart},#{perPageNum}
  	]]>
  	</select>
@@ -77,6 +103,8 @@
  		select count(*) from tbl_board3
  		where bno > 0
  	]]>
+ 	<!--  select count(*) from tbl_board3 where bno > 0 and title like '%제목10%'
+			order by bno desc limit 0, 10;  -->
  	
  	<if test="searchType != null">
  		<if test="searchType =='t'.toString()">
@@ -100,9 +128,11 @@
  			writer like CONCAT('%', #{keyword}, '%'))
  		</if>
  	</if>
- 	
- 	
-
+ 		<![CDATA[
+ 			order by bno desc
+ 			limit #{pageStart}, #{perPageNum}
+ 		]]>
  	</select>	
- 	
-</mapper>				
+
+</mapper>	
+		

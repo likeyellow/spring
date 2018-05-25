@@ -17,6 +17,9 @@
 	type="text/css" media="screen" />
 
 <style>
+body {
+	background-color: black;
+}
 label {
 	color: white;
 	font-weight: bold;

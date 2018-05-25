@@ -36,8 +36,8 @@
 
 
 <style>
-
-/* .tbl_board {
+/*
+.tbl_board {
 	 position: absolute;
 	top: 165px;
 	left: 171px; 
@@ -86,6 +86,20 @@
 	font-size: 25px;
 	display: inline;
 } */
+.tbl_board th{
+	color: white;
+	padding: 10px 10px;
+}
+
+.tbl_board td{
+	color: lightgreen;
+	padding: 5px 5px;
+	text-align: justify;
+}
+.badge bg-red{
+	text-align: justify;
+	padding: auto 20px;
+}
 </style>
 <title>ListALL Page Test</title>
 </head>
@@ -167,7 +181,7 @@
 
 	<div id="slideshow">
 		<!-- start -->
-		<div id="foobar">
+	 	<div id="foobar">  
 			<div id="col1">
 				<a href="#" class="previous">&nbsp;</a>
 			</div>
@@ -194,8 +208,8 @@
 			<div id="col3">
 				<a href="#" class="next">&nbsp;</a>
 			</div>
-		</div>
-
+	 	</div>	
+ 
 		<script src="/resources/throughout/jquery/jquery.slidertron-0.1.js"></script>
 
 		<script type="text/javascript">
@@ -222,7 +236,7 @@
 	
 	<div class="post">
 		<!-- <p class="meta"> -->
-		<div id="meta">
+		<%-- <div id="meta">
 			<div class='box-body'>
 		<select name="searchType">
 			<option value="n"
@@ -258,7 +272,7 @@
 				<button id='searchBtn'>Search</button>
 				<button id='newBtn'>New Board</button>
 			</div>
-		</div>
+		</div> --%>
 			<!-- </div> -->
 			<!--	<span class="date">Sunday, April 26, 2009</span> 7:27 AM Posted by
 						<a href="#">Someone</a>
@@ -274,14 +288,14 @@
 					<th style="width: 10%">BNO</th>
 					<th style="width: 30%">TITLE</th>
 					<th style="width: 20%">WRITER</th>
-					<th style="width: 30%">REGDATE</th>
-					<th style="width: 10%">VIEWCNT</th>
+					<th style="width: 25%">REGDATE</th>
+					<th style="width: 15%">VIEWCNT</th>
 				</tr>
 
 				<c:forEach items="${list}" var="BoardVO">
 				<tr>
 					<td>${BoardVO.bno}</td>
-					<td><a href='/sboard/read?${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${BoardVO.bno}'>
+					<td><a href='/sboard/read?${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${BoardVO.bno}'>
 								${BoardVO.title}</a></td>
 					<td>${BoardVO.writer}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${BoardVO.regdate}" /></td>
@@ -296,29 +310,19 @@
 							<ul class="pagination">
 								
 								<c:if test="${pageMaker.prev}">
-									<li><a href="/sboard/list${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+									<li><a href="/sboard/list${pageMaker.makeSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
 								</c:if>
 
 								<%-- 		<c:forEach items="${listall}" var="BoardVO"> --%>
 								<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 								<li
-									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-										<a href="/sboard/list${pageMaker.makeQuery(idx)}">${idx} </a>
-										
-										<!-- <script>
-										alert(${idx});
-										
-										</script> -->
-									<%-- <c:if test="${pageMaker.cri.page == idx}">active</c:if>">${idx} --%>
-									
+									<c:out value="${pageMaker.cri.page == idx?'class=active':' '}"/>>
+										<a href="/sboard/list${pageMaker.makeSearch(idx)}">${idx} </a>
 								</li>									
 								</c:forEach>
 
 								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								
-								
-									<li><a href="/sboard/list${pageMaker.makeQuery(pageMaker.endPage +1)}">&raquo;</a></li>
-									
+									<li><a href="/sboard/list${pageMaker.makeSearch(pageMaker.endPage +1)}">&raquo;</a></li>
 								</c:if>
 								<%--  </c:forEach>  --%>
 							</ul>
@@ -326,6 +330,48 @@
 					</td>
 				</tr>
 			
+			
+			<tr>
+				<td colspan="5">
+					<div id="meta">
+						<div class='box-body'>
+							<select name="searchType">
+								<option value="n"
+									<c:out value="${cri.searchType == null?'selected':''}"/>>
+							 ---</option>
+								<option value="t"
+									<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
+							Title</option>
+								<option value="c"
+								<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
+							Content</option>
+								<option value="w"
+								<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
+							Writer</option>
+								<option value="tc"
+								<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
+							Title OR Content</option>
+								<option value="cw"
+								<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>
+							Content OR Writer</option>
+								<option value="tcw"
+								<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
+							Title OR Content OR Writer</option>
+							</select>
+						</div>
+	
+			<div class="search"> 
+				<input type="text" name='keyword' id="keywordInput"
+					value="${cri.keyword}">
+				<button id='searchBtn'>Search</button>
+				<button id='newBtn'>New Board</button>
+			</div>
+		</div> 
+			
+			
+			
+			
+			</tr>
 			
 			</table>
 		</div>
@@ -405,7 +451,7 @@
 	
 	</div>
 	<!-- end #page -->
-	</div>
+
 	
 	
 	<script>
@@ -415,14 +461,15 @@
 				var obj = $("#keywordInput");
 				console.log(obj.html());
 				alert(obj.val());
-				
-				self.location = "list"
+			
+				self.location = "/sboard/list"
 					+"?page=1"
-					//+ '${pageMaker.makeQuery(1)}'
+					/* + '${pageMaker.makeQuery(1)} */
 					+ "&searchType="
 					+ $("select option:selected").val()
-					+ "&keyword=" + encodeURIComponent($('#keywordInput').val());	
+					+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
 				});
+				
 			$('#newBtn').on("click", function(evt) {
 				self.location = "/sboard/register";
 				});
