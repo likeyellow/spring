@@ -14,13 +14,22 @@
 	</insert>
 
 	<update id="update">
-		update tbl_reply set replytext = #{replytext}, updatedate = new()
+		update tbl_reply set replytext = #{replytext}, updatedate = now()
 		where rno = #{rno}
 	</update>
 	
 	<delete id="delete">
 		delete from tbl_reply where rno = #{rno}
 	</delete>
+	
+	<select id="listPage" resultType="org.zerock.domain.ReplyVO">
+		select * from tbl_reply where bno = #{bno}
+		order by rno desc limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(bno) from tbl_reply where bno = #{bno}
+	</select>
 
 
 </mapper>				
