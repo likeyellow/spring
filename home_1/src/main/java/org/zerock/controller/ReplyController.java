@@ -96,6 +96,11 @@ public class ReplyController {
 	@RequestMapping(value = "/{bno}/{page}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listPage(@PathVariable("bno") Integer bno, @PathVariable("page") Integer page){
 		
+		
+		System.out.println("=====================================");
+		System.out.println("BNO: " + bno);
+		System.out.println("Page: " + page);
+		
 		ResponseEntity<Map<String, Object>> entity = null;
 		
 		try {

@@ -46,8 +46,9 @@ input{
 	/* text-align: justify; */
 }
 .box-footer{
-	/* background-position: center; */
+	/* background-position: center;  */
 	margin: 15px 130px;
+	padding: 210px 210px 10px 10px;
 }
 
 </style>
@@ -97,6 +98,18 @@ input{
 	</div>
  </form> 
  
+ <!-- The time line -->
+ <ul class="timeline">
+ 	<!-- timeline time label -->
+ 	<li class="time-label" id="repliesDiv"><span class="bg-green">
+ 		Replies List </span></li>
+ </ul>
+ 
+<div class="text-center">
+ 	<ul id="pagination" class="pagination pagination-sm no-margin">
+ 	
+ 	</ul>
+ </div> 
  
 	<script>
 		$(document).ready(function() {
@@ -105,18 +118,18 @@ input{
 			console.log(formObj);
 
 			$(".btn btn-warining modifyBtn").on("click", function() {
-				formObj.attr("action", "/board/modify");
+				formObj.attr("action", "/sboard/modify");
 				formObj.attr("method", "get");
 				formObj.submit();
 			});
 
 			$(".btn btn-danger removeBtn").on("click", function() {
-				formObj.attr("action", "/board/remove");
+				formObj.attr("action", "/sboard/remove");
 				formObj.submit();
 			});
 
 			$(".btn btn-primary goListBtn").on("click", function() {
-				self.location = "/board/listCri";
+				self.location = "/sboard/lis";
 				
 			});
 		});

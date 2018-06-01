@@ -77,9 +77,7 @@
   			}
  	 }});
   	});
-  </script>
-  
-  <script>
+
   	var bno = "6130";
   	
   	
@@ -97,13 +95,13 @@
   });	
   
   	function getAllList(){
-  		$.getJSON("/replies/all/"+ bno, function(data){
+  		$.getJSON("/replies/all/"+ rno, function(data){
   			
   			var str ="";
   			console.log(data.length);
   			
   			$(data).each(function(){
-  				str += "<li data-rno='"+this.rno+"'+ class='replyLi'>"
+  				str += "<li data-rno='"+this.rno+"' class='replyLi'>"
   					+ this.rno + ":" + this.replytext
   					+ "</li>";
   			});		
@@ -123,9 +121,8 @@
   		$("#modDiv").show("slow");
   		
   	});
-  	</script>
+
   	
-  	<script>
   	$("#replyDelBtn").on("click", function(){
   		
   		var rno = $(".modal-title").html();
@@ -168,16 +165,12 @@
   				if(result == 'SUCCESS'){
   					alert("수정 되었습니다.");
   					$("#modDiv").hide("slow");
-  					getPageList(replyPage);
+  					getPageList(replyPage);	// replyPage
   				}
   			}});
   		});
-  	</script>
+  
   	
-  	<ul class='pagination'>
-  	</ul>
-  	
-  	<script>
   	function getPageList(page){
   		
   		$.getJSON("/replies/" + bno + "/" + page, function(data){
@@ -195,9 +188,40 @@
   			
   			printPaging(data.pageMaker);
   		});
+  	} 
+  	
+  	function printPaging(pageMaker){
+  		
+  		var str = "";
+  		
+  		if(pageMaker.prev){
+  			str += "<li><a href='"+(pageMaker.startPage-1)+"'> << </a></li>";
+  		}
+  		for(var i=pageMaker.startPage, len = pageMaker.endPage; i<= len; i++){
+  			var strClass= pageMaker.cri.page == i?'class=active': '';
+  			str += "<li " + strClass + "><a href='"+i+"'>"+i+"</a></li>";
+  		}
+  		if(pageMaker.next){
+  			str += "<li><a href='"+(pageMaker.endPage + 1)+ "'> >> </a></li>";
+  		}
+  		$('.pagination').html(str);
   	}
   	
+  	var replyPage = 1;
   	
+  	$(".pagination").on("click", "li a", function(event){
+  		
+  		event.preventDefault();
+  		
+  		replyPage = $(this).attr("href");
+  		
+  		getPageList(replyPage);
+  		
+  	});
   	</script>
+  	
+  	<ul class='pagination'>
+  	</ul>
+ 
 </body>
 </html>
