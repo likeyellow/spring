@@ -51,7 +51,11 @@
 			<button type="button" id="CloseBtn">Close</button>
 		</div>
 	</div>
-				
+	
+	
+	<ul class='pagination'>
+  	</ul>
+  				
   <script>
   	$("#replyAddBtn").on("click", function(){
   		
@@ -218,10 +222,10 @@
   		getPageList(replyPage);
   		
   	});
-  	</script>
+
+</script>
   	
-  	<ul class='pagination'>
-  	</ul>
+  	
  
 </body>
 </html>
