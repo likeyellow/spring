@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> -->
 
 
 <!--  	이 Mapper 대신 
@@ -8,7 +8,7 @@
 			org.zerock.persistence/BoardMapper.java(<<인터페이스임) 
 			 사용함
  -->
-<mapper namespace="org.zerock.mapper.memberMapper">
+<!-- <mapper namespace="org.zerock.mapper.memberMapper">
 
 	<select id="getTime" resultType="string">
 		select now()
@@ -29,4 +29,4 @@
 		resultType="org.zerock.domain.MemberVO">
 		select * from tbl_member3 where = #{userid} and userpw = #{userpw}
 		</select>
-</mapper>				
+</mapper>				 -->

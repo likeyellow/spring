@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 import org.zerock.domain.PageMaker;
 import org.zerock.domain.SearchCriteria;
 import org.zerock.persistence.BoardMapper;
@@ -27,7 +28,7 @@ public class SearchBoardController {
 		@RequestMapping(value="list", method = RequestMethod.GET)
 		public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
 			
-		log.info(cri.toString());
+		log.info("리스트 로그입니다..." + cri.toString());
 		
 		//model.addAttribute("list", mapper.listCriteria(cri));
 		
@@ -42,13 +43,23 @@ public class SearchBoardController {
 		model.addAttribute("pageMaker", pageMaker);
 		}
 		
+//-----------------------------------------------------------------------------------------------		
+		
 		@RequestMapping(value="read", method = RequestMethod.GET)
 		public void read(@RequestParam("bno") int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
+		/*public void read(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, Model model)throws Exception{*/
 			model.addAttribute("bo",mapper.read(bno));
 		}
 		
+		/*@RequestMapping(value="/read", method = RequestMethod.GET)
+		public void read(@RequestParam("bno") int bno, Model model) throws Exception{
+			
+			model.addAttribute(mapper.read(bno));
+		}*/
+		
 		@RequestMapping(value="remove", method = RequestMethod.POST)
 		public String remove(@RequestParam("bno") int bno, SearchCriteria cri, RedirectAttributes rttr) throws Exception{
+		/*public String remove(@RequestParam("bno") int bno, Criteria cri, RedirectAttributes rttr) throws Exception{*/
 			
 			mapper.delete(bno);
 			
@@ -64,6 +75,7 @@ public class SearchBoardController {
 		
 		@RequestMapping(value="modify", method = RequestMethod.GET)
 		public void modifyGET(int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
+		/*public void modifyGET(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, Model model)throws Exception{*/
 			model.addAttribute("bo", mapper.read(bno));
 		}
 		

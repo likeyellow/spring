@@ -20,6 +20,7 @@ public class ReplyServiceImpl implements ReplyService {
 	@Setter(onMethod_= {@Autowired})
 	ReplyMapper reply;
 	
+	
 	@Override
 	public void addReply(ReplyVO vo) throws Exception {
 		
@@ -44,7 +45,7 @@ public class ReplyServiceImpl implements ReplyService {
 		reply.delete(rno);
 	}
 
-	@Override
+/*	@Override
 	public List<ReplyVO> listPage(Integer bno, Criteria cri) throws Exception {
 		
 		Map<String, Object> paramMap = new HashMap<>();
@@ -52,7 +53,7 @@ public class ReplyServiceImpl implements ReplyService {
 		paramMap.put("cri", cri);
 		
 		return reply.listPage(bno, cri); //   ????????? πª ∏Æ≈œ«ÿ¡‡æﬂ «œ¡ˆ????
-	}
+	}*/
 
 	@Override
 	public int count(Integer bno) throws Exception {

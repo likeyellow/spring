@@ -23,7 +23,7 @@ public class testDynamic1 {
 	public void testDynamic()throws Exception {
 		
 		SearchCriteria cri = new SearchCriteria();
-		cri.setPage(1);
+		cri.setPage(3);
 		cri.setKeyword("»ç¿ëÀÚ10");
 		cri.setSearchType("w");
 		

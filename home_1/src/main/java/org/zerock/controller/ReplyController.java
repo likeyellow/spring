@@ -1,7 +1,5 @@
 package org.zerock.controller;
 
-
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,6 +91,8 @@ public class ReplyController {
 		}
 		return entity;
 	}
+	
+	
 	@RequestMapping(value = "/{bno}/{page}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listPage(@PathVariable("bno") Integer bno, @PathVariable("page") Integer page){
 		
@@ -121,6 +121,7 @@ public class ReplyController {
 			map.put("pageMaker", pageMaker);
 			
 			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);	
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);

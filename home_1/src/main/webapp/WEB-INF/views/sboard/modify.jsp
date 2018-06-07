@@ -6,7 +6,36 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/resources/throughout/css/slidertron.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="/resources/throughout/css/style.css" rel="stylesheet" type="text/css" media="screen" />
-<script src="jquery-3.3.1.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<style>
+
+.form-group{
+
+	position: relative;
+	color: black;
+	/* background-color: yellow;
+	height: 100px; */
+	width: 1700px;
+	/* 	background-position: center; */
+	margin: 15px 130px;
+	padding: 10px 10px 10px 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	/* text-align: justify; */
+}
+.box-footer{
+
+	position: absolute;
+	top: 300px;
+	left: 171px; 
+}
+
+
+
+</style>
 <title>Modify Test</title>
 </head>
 <body>
@@ -39,7 +68,7 @@
 		</div>
 	</form>
 
-	<div class="box-footer">
+<div class="box-footer">
 		<button type="submit" class="btn btn-primary">SAVE</button>
 		<button type="submit"class="btn btn-warning">CANCEL</button>
 	</div>
@@ -51,7 +80,7 @@
 			console.log(formObj);
 
 			$(".btn-warning").on("click", function() {
-				self.location = "/board/list?page=${cri.page}&perPageNum=${cri.perPageNum}"
+				self.location = "/sboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}"
 					+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
 			});
 
@@ -60,5 +89,9 @@
 			});
 		});
 	</script>
+	
+	
+	
+		
 </body>
 </html>

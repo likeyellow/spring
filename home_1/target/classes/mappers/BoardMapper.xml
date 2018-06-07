@@ -47,8 +47,8 @@
  
  	<select id="listCriteria" resultType="org.zerock.domain.BoardVO">
  	<![CDATA[
- 		select bno, title, writer, regdate, viewcnt from tbl_board3
- 		where bno > 0 order by bno desc, regdate desc limit #{pageStart},#{perPageNum}
+ 		select bno, title, content, writer, regdate, viewcnt from tbl_board3
+ 		where bno > 0 order by bno desc, regdate desc limit #{pageStart}, #{perPageNum}
  	]]>
  	</select>
  	
@@ -64,9 +64,12 @@
  	]]>
  	</select>
  	
+ 	
+ 	
  	<select id="listSearch" resultType="org.zerock.domain.BoardVO">
  	<![CDATA[
  		select * from tbl_board3 where bno > 0 
+ 		
  	]]>
  		
  		<if test="searchType != null">
@@ -96,11 +99,13 @@
  		order by bno desc
  		limit #{pageStart},#{perPageNum}
  	]]>
+ 	
+ 	
  	</select>
  	
  	<select id="listSearchCount" resultType="int">
  	<![CDATA[
- 		select count(*) from tbl_board3
+ 		select count(bno) from tbl_board3
  		where bno > 0
  	]]>
  	<!--  select count(*) from tbl_board3 where bno > 0 and title like '%제목10%'
@@ -128,11 +133,24 @@
  			writer like CONCAT('%', #{keyword}, '%'))
  		</if>
  	</if>
- 		<![CDATA[
+ 		<!-- <![CDATA[
  			order by bno desc
  			limit #{pageStart}, #{perPageNum}
- 		]]>
+ 		]]> -->
  	</select>	
 
+
+
+
+<!-- public List<BoardVO> listPage(int bno) throws Exception; -->
+
+<select id="listPage" resultType="org.zerock.domain.BoardVO">
+	<![CDATA[
+		select bno, title, content, writer, regdate, viewcnt 
+		from tbl_board3 where bno > 0 
+		order by bno desc, regdate desc 
+		limit #{page}, 10
+	]]>
+</select>	
 </mapper>	
 		

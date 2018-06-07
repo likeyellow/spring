@@ -7,7 +7,8 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.Data;
-
+import lombok.extern.log4j.Log4j;
+@Log4j
 @Data
 public class PageMaker {
 	
@@ -44,15 +45,20 @@ public class PageMaker {
 	}
 	public String makeSearch(int page) {
 		
+		log.info("page.....1" + page);
+		
 		UriComponents uriComponents =
 				UriComponentsBuilder.newInstance()
 				 .queryParam("page", page)
 				 .queryParam("perPageNum", cri.getPerPageNum())
 				 .queryParam("searchType",((SearchCriteria) cri).getSearchType())
-				 .queryParam("keyword", encoding(((SearchCriteria) cri).getKeyword())).build();
+				 .queryParam("keyword", encoding(((SearchCriteria) cri).getKeyword()))
+				 .build();
 		
-		return uriComponents.toUriString();
+		log.info("page.....2" + page);
+		return uriComponents.toUriString();	
 	}
+	
 	public String makeQuery(int page) {
 		
 		UriComponents uriComponents =
@@ -65,6 +71,7 @@ public class PageMaker {
 				
 		return uriComponents.toUriString();
 	}
+	
 	private String encoding(String keyword) {
 		
 		if(keyword == null || keyword.trim().length() == 0) {

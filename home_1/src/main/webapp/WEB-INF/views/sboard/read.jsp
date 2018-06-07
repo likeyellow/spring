@@ -108,11 +108,11 @@ input {
 </head>
 <body>
 	<form role="form" action="modify" method="post">
-		<input type='hidden' name='bno' value="${bo.bno}"> <input
-			type='hidden' name='page' value="${cri.page}"> <input
-			type='hidden' name='perPageNum' value="${cri.perPageNum}"> <input
-			type='hidden' name='searchType' value="${cri.searchType}"> <input
-			type='hidden' name='keyword' value="${cri.keyword}">
+		<input type='hidden' name='bno' value="${bo.bno}"> 
+		<input type='hidden' name='page' value="${cri.page}"> 
+		<input type='hidden' name='perPageNum' value="${cri.perPageNum}"> 
+		<input type='hidden' name='searchType' value="${cri.searchType}"> 
+		<input type='hidden' name='keyword' value="${cri.keyword}">
 	</form>
 
 	<form role="form" method="post">
@@ -155,9 +155,14 @@ input {
 	<div class="box-footer">
 		<button type="submit" class="btn btn-warining modifyBtn">MODIFY</button>
 		<button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
-		<button type="submit" class="btn btn-primary goListBtn">LIST
-			ALL</button>
+		<button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
 	</div>
+	
+	<form role="form" action="modifyPage" method="post">
+		<input type="hidden" name="bno" value="${bo.bno}">
+		<input type="hidden" name="page" value="${cri.page}">
+		<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
+	</form>
 
 	<!-- The time line -->
 	<ul class="timeline">
@@ -224,20 +229,21 @@ input {
 		$(document).ready(function() {
 			var formObj = $("form[role='form']");
 
-			console.log(formObj);
+			console.log("이게.....???" +formObj);
 
-			$(".btn btn-warining modifyBtn").on("click", function() {
-				formObj.attr("action", "/sboard/modify");
+			$(".btn-warining").on("click", function() {
 				formObj.attr("method", "get");
+				formObj.attr("action", "/sboard/modify");
+				
 				formObj.submit();
 			});
 
-			$(".btn btn-danger removeBtn").on("click", function() {
+			$(".btn-danger").on("click", function() {
 				formObj.attr("action", "/sboard/remove");
 				formObj.submit();
 			});
 
-			$(".btn btn-primary goListBtn").on("click", function() {
+			$(".btn-primary").on("click", function() {
 				/* self.location = "/sboard/list"; */
 				formObj.attr("method", "get");
 				formObj.attr("action", "/sboard/list");

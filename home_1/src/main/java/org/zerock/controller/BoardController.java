@@ -47,18 +47,37 @@ public class BoardController {
 		return "redirect:/board/listCri";
 	}
 	
+	@RequestMapping(value="listPage", method=RequestMethod.GET)
+	public void listPage(@ModelAttribute("cri")Criteria cri, Model model)throws Exception{
+		
+		//log.info("Show list Page with Criteria............");
+		log.info(cri.toString());
+		
+		model.addAttribute("listall", mapper.listCriteria(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(131);
+		
+		//pageMaker.setTotalCount(mapper.listCountCriteria(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
+	}
+	
+	
 	@RequestMapping(value="listCri", method=RequestMethod.GET)
 	public void listAll(@ModelAttribute("cri")Criteria cri, Model model)throws Exception{
 		
 		log.info("Show list Page with Criteria............");
 		model.addAttribute("listall", mapper.listCriteria(cri));
-		PageMaker pageMaker = new PageMaker();
+		
+		/*PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		//pageMaker.setTotalCount(131);
+		pageMaker.setTotalCount(131);
 		
-		pageMaker.setTotalCount(mapper.listCountCriteria(cri));
+		//pageMaker.setTotalCount(mapper.listCountCriteria(cri));
 		
-		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("pageMaker", pageMaker);*/
 	}
 	
 	//@ModelAttribute("cri")Criteria cri,

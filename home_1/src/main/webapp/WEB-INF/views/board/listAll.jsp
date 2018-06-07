@@ -53,7 +53,7 @@
 
 			<tr>
 				<td>${BoardVO.bno}</td>
-				<td><a href='/board/read?bno=${bno}'>${BoardVO.title}</a></td>
+				<td><a href='/board/read?bno=${BoardVO.bno}'>${BoardVO.title}</a></td>
 				<td>${BoardVO.writer}</td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 						value="${BoardVO.regdate}" /></td>

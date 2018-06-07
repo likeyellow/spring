@@ -99,6 +99,8 @@
   });	
   
   	function getAllList(){
+  		
+  		var rno = 6130;
   		$.getJSON("/replies/all/"+ rno, function(data){
   			
   			var str ="";
@@ -134,7 +136,7 @@
   		
   		$.ajax({
   			type : 'delete',
-  			headers : '/replies/' + rno,
+  			url : '/replies/' + rno,
   			headers : {
   				"Content-Type" : "application/json",
   				"X-HTTP-Method-Override" : "DELETE"

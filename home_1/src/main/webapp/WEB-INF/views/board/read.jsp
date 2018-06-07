@@ -129,7 +129,7 @@ input{
 			});
 
 			$(".btn btn-primary goListBtn").on("click", function() {
-				self.location = "/sboard/lis";
+				self.location = "/sboard/list";
 				
 			});
 		});

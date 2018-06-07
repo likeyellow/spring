@@ -104,80 +104,7 @@
 <title>ListALL Page Test</title>
 </head>
 <body>
-	<!-- <h1>테스트 중입니다</h1> -->
-	<%-- <table class="tbl_board">
-		<tr>
-			<th style="width: 10%">BNO</th>
-			<th style="width: 30%">TITLE</th>
-			<th style="width: 20%">WRITER</th>
-			<th style="width: 30%">REGDATE</th>
-			<th style="width: 10%">VIEWCNT</th>
-		</tr>
 
-		<c:forEach items="${listall}" var="BoardVO">
-
-			<tr>
-				<td>${BoardVO.bno}</td>
-				<td><a
-					href='/sboard/read${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${BoardVO.bno}'>
-						${BoardVO.title}</a></td>
-				<td>${BoardVO.writer}</td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-						value="${BoardVO.regdate}" /></td>
-				<td><span class="badge bg-red">${BoardVO.viewcnt}</span>
-		</c:forEach>
-		</tr>
-
-
-		<tr>
-			<td colspan="5">
-				<div class="text-center">
-					<ul class="pagination">
-
-						<c:if test="${pageMaker.prev}">
-							<li><a
-								href="list${pageMaker.makeQuery(pageMaker.startPage -1) }">&laquo;</a>
-							</li>
-						</c:if>
-						<c:forEach items="${listall}" var="BoardVO">
-						<c:forEach begin="${pageMaker.startPage}"
-							end="${pageMaker.endPage}" var="idx">
-							
-								<li
-									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="list${pageMaker.makeQuery(idx)}">${idx}</a>
-								</li>
-							</c:forEach>
-
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="list${pageMaker.makeQuery(pageMaker.endPage +1)}">&raquo;</a>
-								</li>
-							</c:if>
-						 </c:forEach> 
-					</ul>
-				</div>
-			</td>
-		</tr>
- --%>
-	<!-- <tr> -->
-	
-	<%-- <input type="text" name='keyword' id="keywordInput"
-	value='${cri.keyword}'>
-	<button id='searchBtn'>Search</button>
-	<button id='newBtn'>New Board</button> --%>
-	<!-- </tr> -->
-
-	<!-- <tr> 
-			<div class="text-center"> 
-			<ul class="pagination">
-					<li>&laquo;</li>
-					<li>.........</li>
-					<li>&raquo;</li>
-			 	</ul> 
-		 	</div> 
-		</tr> -->
-	<!-- 	</div> -->
 
 	<div id="slideshow">
 		<!-- start -->
@@ -295,7 +222,8 @@
 				<c:forEach items="${list}" var="BoardVO">
 				<tr>
 					<td>${BoardVO.bno}</td>
-					<td><a href='/sboard/read?${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${BoardVO.bno}'>
+					<td><a href="/sboard/read${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${BoardVO.bno}">
+					<%-- <td><a href="/sboard/read${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${BoardVO.bno}"> --%>
 								${BoardVO.title}</a></td>
 					<td>${BoardVO.writer}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${BoardVO.regdate}" /></td>
@@ -311,6 +239,7 @@
 								
 								<c:if test="${pageMaker.prev}">
 									<li><a href="/sboard/list${pageMaker.makeSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
+									<%-- <li><a href="/sboard/list${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li> --%>
 								</c:if>
 
 								<%-- 		<c:forEach items="${listall}" var="BoardVO"> --%>
@@ -318,11 +247,13 @@
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class=active':' '}"/>>
 										<a href="/sboard/list${pageMaker.makeSearch(idx)}">${idx} </a>
+										<%-- <a href="/sboard/list${pageMaker.makeQuery(idx)}">${idx} </a> --%>
 								</li>									
 								</c:forEach>
 
 								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 									<li><a href="/sboard/list${pageMaker.makeSearch(pageMaker.endPage +1)}">&raquo;</a></li>
+									<%-- <li><a href="/sboard/list${pageMaker.makeQuery(pageMaker.endPage +1)}">&raquo;</a></li> --%>
 								</c:if>
 								<%--  </c:forEach>  --%>
 							</ul>
@@ -360,7 +291,7 @@
 							</select>
 						</div>
 	
-			<div class="search"> 
+			<div class="search"> <!-- 있어야 하는가??? 없애면 어떨까??? -->
 				<input type="text" name='keyword' id="keywordInput"
 					value="${cri.keyword}">
 				<button id='searchBtn'>Search</button>

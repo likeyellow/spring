@@ -101,9 +101,9 @@
 
 			<tr>
 				<td>${BoardVO.bno}</td>
-				<td><a
-					href='/board/read${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${BoardVO.bno}'>
-						${BoardVO.title}</a></td>
+				<%-- <td><a href="/board/read${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${BoardVO.bno}"> --%>
+				<%-- <td><a href="/board/read${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${BoardVO.bno}"> --%>
+				<td><a href="/board/read?bno=${BoardVO.bno}">${BoardVO.title}</a></td>
 				<td>${BoardVO.writer}</td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 						value="${BoardVO.regdate}" /></td>
@@ -118,23 +118,24 @@
 					<ul class="pagination">
 
 						<c:if test="${pageMaker.prev}">
-							<li><a
-								href="listCri${pageMaker.makeQuery(pageMaker.startPage -1) }">&laquo;</a>
-							</li>
+							<%-- <li><a href="listCri${pageMaker.makeQuery(pageMaker.startPage -1) }">&laquo;</a> --%>
+							<li><a href="listCri?page=${pageMaker.startPage -1 }">&laquo;</a></li>
 						</c:if>
+						
 				<%-- 		<c:forEach items="${listall}" var="BoardVO"> --%>
 						<c:forEach begin="${pageMaker.startPage}"
 							end="${pageMaker.endPage}" var="idx">
 							
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="listCri${pageMaker.makeQuery(idx)}">${idx}</a>
+									<%-- <a href="listCri${pageMaker.makeQuery(idx)}">${idx}</a> --%>
+									<a href="listCri?page=${idx}">${idx}</a>
 								</li>
-							</c:forEach>
+						</c:forEach>
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="listCri${pageMaker.makeQuery(pageMaker.endPage +1)}">&raquo;</a>
+								<%-- <li><a href="listCri${pageMaker.makeQuery(pageMaker.endPage +1)}">&raquo;</a> --%>
+								<li><a href="listCri?page=${pageMaker.endPage +1}">&raquo;</a>
 								</li>
 							</c:if>
 						<%--  </c:forEach>  --%>
