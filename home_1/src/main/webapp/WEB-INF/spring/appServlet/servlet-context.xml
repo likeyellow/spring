@@ -28,8 +28,15 @@
 	<context:component-scan base-package="org.zerock.controller" />
 	<!--  <component-scan> 의미도 상당히 중요, component-scan은 base-package 속성값에 해당하는 패키지 내부의 클래스들을
 	조사한다는 뜻... 이는 <annotaion-driven>과 같이 결합해서 해당 패키지에 어노테이션 처리가 된 컨트롤러를 작성만 해주면 자동으로
-	인식되게 한다
-	 -->
+	인식되게 한다 -->
+	 
+	<beans:bean id ="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760"></beans:property>
+	</beans:bean>
 	
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="C:\\zzz\\upload2">
+		</beans:constructor-arg>
+	</beans:bean>
 	
 </beans:beans>

@@ -109,6 +109,7 @@ input {
 <body>
 	<form role="form" action="modify" method="post">
 		<input type='hidden' name='bno' value="${bo.bno}"> 
+		<input type='hidden' name='replycnt' value="${bo.replycnt}"> <!--  replycnt 를 쓰려면 여기에 이렇게 읽어와야 하는건가? (2018/06/11) -->
 		<input type='hidden' name='page' value="${cri.page}"> 
 		<input type='hidden' name='perPageNum' value="${cri.perPageNum}"> 
 		<input type='hidden' name='searchType' value="${cri.searchType}"> 
@@ -167,7 +168,11 @@ input {
 	<!-- The time line -->
 	<ul class="timeline">
 		<!-- timeline time label -->
-		<li class="time-label" id="repliesDiv"><span class="bg-green">Replies List</span></li>
+		<li class="time-label" id="repliesDiv">
+		<span class="bg-green">
+			Replies List <small id="replycntSmall"> [${bo.replycnt}]</small>
+			
+		</span></li>
 	</ul>
 	<div class="text-center">
 		<ul id="pagination" class="pagination pagination-sm no-margin ">
@@ -300,6 +305,7 @@ var printData = function(replyArr, target, templateObject){
 				printPaging(data.pageMaker, $(".pagination"));
 
 				$("#modifyModal").modal("hide");
+				$("#replycntSmall").html("[ " + data.pageMaker.totalCount +  " ]");
 			});
 		}
 
@@ -322,7 +328,7 @@ var printData = function(replyArr, target, templateObject){
 		};
 
 		$("#repliesDiv").on("click", function() {
-			if ($(".timeline li ").size() > 1) {
+			if ($(".timeline").size() > 1) {
 				return;
 			}
 			getPage("/replies/" + bno + "/1");

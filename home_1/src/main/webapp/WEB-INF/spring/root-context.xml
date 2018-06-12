@@ -20,12 +20,12 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 	<beans>
-		<bean id="greetingService"
+		<!-- <bean id="greetingService"
 			class="org.zerock.mapper.GreetingServiceImpl1">
-			<property name="greeting"> <!-- GreetingService의 setXXX함수를 호출하는 것 같음 -->
+			<property name="greeting"> GreetingService의 setXXX함수를 호출하는 것 같음
 				<value>나는 그냥 한국말로 "안녕"이라고 할거야!!</value>
 			</property>
-		</bean>
+		</bean> -->
 		<bean id="dataSource"
 			class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 			<property name="driverClassName"

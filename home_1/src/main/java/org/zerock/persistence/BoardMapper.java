@@ -2,6 +2,7 @@ package org.zerock.persistence;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.MemberVO;
@@ -59,11 +60,13 @@ public interface BoardMapper {
 
 	public MemberVO getUserName() throws Exception;
 	 
-	public void regist(BoardVO vo) throws Exception;
+	public void regist(BoardVO vo) throws Exception;	// 이 기능은 update 메소드로 대체함
 	
 	public List<BoardVO> listPage(int bno) throws Exception;
 
 	public List<BoardVO> listCriteria(Criteria cri)throws Exception;
+	
+	
 	
 	public int countPaging(Criteria cri) throws Exception;
 	
@@ -73,5 +76,10 @@ public interface BoardMapper {
 	
 	public int listSearchCount(SearchCriteria cri) throws Exception;
 	
+	public int updateReplyCnt(@Param("bno")Integer bno, @Param("amount")int amount)throws Exception;
+	
+	public int updateViewCnt(Integer bno) throws Exception;
+	
+	public void addAttach(String fullName) throws Exception;
 	
 }

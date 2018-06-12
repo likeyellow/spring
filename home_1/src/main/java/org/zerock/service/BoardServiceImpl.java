@@ -1,9 +1,13 @@
 package org.zerock.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.SearchCriteria;
@@ -37,11 +41,13 @@ public class BoardServiceImpl implements BoardService {
 		//return null;
 	}
 
+	@Transactional(isolation=Isolation.READ_COMMITTED)
 	@Override
 	public BoardVO read(int bno) throws Exception {
 		
 		log.info("read 호출함.....!!!!");
 		
+		mapper.updateViewCnt(bno);
 		return mapper.read(bno);
 	}
 
@@ -51,13 +57,23 @@ public class BoardServiceImpl implements BoardService {
 	//	log.info(mapper.delete(bno));
 
 	}
-
+	
+	@Transactional
 	@Override
-	public void update(BoardVO vo) throws Exception {
+	public void update(BoardVO vo) throws Exception {	// register 메소드 
 		
+		mapper.create(vo);
 		
+		String[] files = vo.getFiles();
+		
+		if(files == null) { return; }
+		
+		for(String fileName: files) {
+			mapper.addAttach(fileName);
+		}
 	}
-
+	
+	
 	@Override
 	public List<BoardVO> listAll() throws Exception {
 		
@@ -105,4 +121,35 @@ public class BoardServiceImpl implements BoardService {
 		
 		return mapper.listSearchCount(cri);
 	}
+
+	@Override
+	public int updateReplyCnt(Integer bno, int amount) throws Exception {
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("bno", bno);
+		paramMap.put("amount", amount);
+		
+		// session.update(namespace + ".updateReplyCnt", paramMap);	
+		return mapper.updateReplyCnt(bno, amount);
+	}
+
+	@Override
+	public int updateViewCnt(Integer bno) throws Exception {
+		
+		return mapper.updateViewCnt(bno);
+	}
+
+	@Override
+	public void addAttach(String fullName) throws Exception {
+		
+		mapper.addAttach(fullName);
+		
+	}
+	
+	
+	
+	
+	
+	
 }

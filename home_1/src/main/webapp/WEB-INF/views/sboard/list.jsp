@@ -224,7 +224,8 @@
 					<td>${BoardVO.bno}</td>
 					<td><a href="/sboard/read${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${BoardVO.bno}">
 					<%-- <td><a href="/sboard/read${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${BoardVO.bno}"> --%>
-								${BoardVO.title}</a></td>
+								${BoardVO.title} <strong>[${BoardVO.replycnt}]</strong>
+								</a></td>
 					<td>${BoardVO.writer}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${BoardVO.regdate}" /></td>
 					<td><span class="badge bg-red">${BoardVO.viewcnt}</span>

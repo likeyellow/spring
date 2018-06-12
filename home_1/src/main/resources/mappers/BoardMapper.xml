@@ -16,7 +16,7 @@
 
 	<select id="read" resultType="org.zerock.domain.BoardVO">
 		select bno, title, content, writer,
-		regdate, viewcnt
+		regdate, viewcnt, replycnt
 		from tbl_board3
 		where bno = #{bno}
 	</select>
@@ -47,8 +47,10 @@
  
  	<select id="listCriteria" resultType="org.zerock.domain.BoardVO">
  	<![CDATA[
- 		select bno, title, content, writer, regdate, viewcnt from tbl_board3
- 		where bno > 0 order by bno desc, regdate desc limit #{pageStart}, #{perPageNum}
+ 		select bno, title, content, writer, regdate, viewcnt, replycnt from tbl_board3
+ 		where bno > 0 
+ 		order by bno desc, regdate desc 
+ 		limit #{pageStart}, #{perPageNum}
  	]]>
  	</select>
  	
@@ -151,6 +153,34 @@
 		order by bno desc, regdate desc 
 		limit #{page}, 10
 	]]>
-</select>	
+</select>
+
+<!-- <select id="listCriteria" resultType="org.zerock.domain.BoardVO">
+	<![CDATA[
+		select bno, title, content, writer, regdate, viewcnt, replycnt
+		from tbl_board3
+		where bno > 0
+		order by bno desc, regdate desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
+</select>	 -->
+
+<update id="updateReplyCnt">
+	<!-- update tbl_board3 set replycnt = replycnt + #{amount} where bno = #{bno}  -->
+	<![CDATA[
+		update tbl_board3 set replycnt = (select count(rno) from tbl_reply where bno = #{bno}) where bno > 0
+	]]>	
+</update>
+
+<update id="updateViewCnt">
+	<![CDATA[
+		update tbl_board3 set viewcnt = viewcnt +1 where bno = #{bno}
+	]]>
+</update>
+
+<insert id="addAttach">
+	insert into tbl_attach(fullName, bno) values(#{fullName}, Last_INSERT_ID())
+</insert>
+
 </mapper>	
 		

@@ -22,5 +22,7 @@ public interface ReplyService {
 		
 		public int count(Integer bno) throws Exception;
 		
+		public int getBno(Integer rno) throws Exception;
+		
 	
 }
