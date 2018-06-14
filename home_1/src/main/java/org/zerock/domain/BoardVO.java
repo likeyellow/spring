@@ -16,4 +16,6 @@ public class BoardVO {
 	private int replycnt;
 	
 	private String[] files;
+	
+	
 }

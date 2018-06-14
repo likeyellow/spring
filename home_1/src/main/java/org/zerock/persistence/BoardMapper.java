@@ -82,4 +82,10 @@ public interface BoardMapper {
 	
 	public void addAttach(String fullName) throws Exception;
 	
+	public String getAttach(Integer bno) throws Exception;	// ??? return type 이상함. 이상해......... >.<
+	
+	public void deleteAttach(Integer bno)throws Exception;
+	
+	public void replaceAttach(@Param("fullName") String fullName, @Param("bno") Integer bno)throws Exception;
+	
 }

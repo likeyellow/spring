@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.util.MediaUtils;
@@ -90,7 +91,7 @@ public class UploadController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/displayFile")
+	@RequestMapping("displayFile")
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
 		
 		InputStream in = null;
@@ -129,7 +130,7 @@ public class UploadController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/deleteFile", method=RequestMethod.POST)
+	@RequestMapping(value="deleteFile", method=RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(String fileName){
 		
 		log.info("delete file: " + fileName);
@@ -150,6 +151,30 @@ public class UploadController {
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "deleteAllFiles", method=RequestMethod.POST)
+	public ResponseEntity<String>deleteFile(@RequestParam("files[]") String[] files){
+		
+		log.info("delete all files: " + files);
+		
+		if(files == null || files.length == 0) {
+			return new ResponseEntity<String>("deleted", HttpStatus.OK);
+		}
+		for(String fileName : files) {
+			String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+			
+			MediaType mType = MediaUtils.getMediaType(formatName);
+			
+			if(mType != null) {
+				
+				String front = fileName.substring(0, 12);
+				String end = fileName.substring(14);
+				new File(uploadPath + (front+end).replace('/', File.separatorChar)).delete();
+			}
+			new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+		}
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+	}
 	
 }
 

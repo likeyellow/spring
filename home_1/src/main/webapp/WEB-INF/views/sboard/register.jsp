@@ -97,6 +97,22 @@ h1{
 	margin: 30px 30px;
 	justify-content: center;
 }
+
+.uploadedList{
+	position: absolute;
+	top: 42em;
+	width: 100%;
+	height: 100px;
+	background-color: white;
+	margin: 30px 30px;
+	justify-content: center;
+}
+
+.btn-primary{
+	position: absolute;
+	left: 2em;
+	margin: 30px 0px;
+}
 </style>
 </head>
 <body>
@@ -137,5 +153,80 @@ h1{
 			
 			</div>
 	</form>
+	
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>	
+	
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	
+	<script id="template" type="text/x-handlebars-template">
+	<li>
+		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+			<div class="mailbox-attachment-info">
+				<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+				<a href="{{fullName}}"
+					class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+			</div>
+	</li>
+	</script>	
+	
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  			crossorigin="anonymous"></script>
+	
+	<script>
+	var template = Handlebars.compile($("#template").html());
+	
+	$(".fileDrop").on("dragenter dragover", function(event){
+		event.preventDefault();
+	});
+	
+	$(".fileDrop").on("drop", function(event){
+		event.preventDefault();
+		
+		var files = event.originalEvent.dataTransfer.files;
+		
+		var file = files[0];
+		
+		var formData = new FormData();
+		
+		formData.append("file", file);
+		
+		$.ajax({
+			url: '/sboard/uploadAjax',
+			data: formData,
+			dataType: 'text',
+			processData: false,
+			contentType: false,
+			type: 'post',
+			success: function(data){
+				
+				var fileInfo = getFileInfo(data);
+				
+				var html = template(fileInfo);
+				
+				$(".uploadedList").append(html);
+			}
+		});
+	});
+	
+	$("#registerForm").submit(function(event){
+		event.preventDefault();
+		
+		var that = $(this);
+		
+		var str = "";
+		
+		$(".uploadedList .delbtn").each(function(index){
+			str += "<input type='hidden' name= 'files["+index+"]' value='"+$(this).attr("href") + "'> ";
+		});
+		
+		that.append(str);
+		that.get(0).submit();
+	});
+	
+	</script>
+	
 </body>
 </html>

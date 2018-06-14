@@ -10,8 +10,6 @@
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
 
-<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>	
 
 <link href="/resources/throughout/css/slidertron.css" rel="stylesheet"
 	type="text/css" media="screen" />
@@ -20,53 +18,56 @@
 
 <style>
 .box-header {
-	margin: 30px auto;
-}
+	/* margin: 30px auto; */
+	}
 
 label {
 	color: white;
 	font-weight: bold;
 	font-size: 19px;
-	width: 120px;
+	width: 30%;
 	font-family: Arial, Helvetica, sans-serif;
 	/* text-align: justify; */
 	margin: 15px 70px;
+	justify-content: left;
 }
 
 input {
 	color: black;
-	/* background-color: yellow;
-	height: 100px; */
-	width: 700px;
+/* 	width: 70%; */
 	/* 	background-position: center; */
 	margin: 15px 130px;
 	padding: 10px 10px 10px 10px;
 	font-family: Arial, Helvetica, sans-serif;
 	/* text-align: justify; */
+	justify-content: center;
 }
 
 .form-control {
-	width: 700px;
+	width: 70%;
 	margin: 15px 130px;
 	padding: 10px 10px 10px 10px;
 	font-family: Arial, Helvetica, sans-serif;
 	/* text-align: justify; */
+	justify-content: center;
 }
 
 .form-control-w {
-	width: 700px;
+	width: 70%;
 	margin: 15px 130px;
 	padding: 10px 10px 10px 10px;
 	font-family: Arial, Helvetica, sans-serif;
 	/* text-align: justify; */
+	justify-content: center;
 }
 
 .form-control-c {
-	width: 700px;
+	width: 70%;
 	margin: 15px 130px;
 	padding: 10px 10px 10px 10px;
 	font-family: Arial, Helvetica, sans-serif;
 	/* text-align: justify; */
+	justify-content: center;
 }
 
 .box-footer {
@@ -75,6 +76,7 @@ input {
 	/* left: 100px; */
 	margin: 25px 130px;
 	padding: 20px 20px 20px auto;
+	justify-content: left;
 }
 
 .box-title {
@@ -101,6 +103,34 @@ input {
 }
 .replyLi{
 	color: white;
+}
+
+.bg-green{
+	
+}
+
+.popup{
+	position: absolute;
+}
+.back{
+	background-color: white; 
+	opacity: 0.5;
+	width: 100%;
+	height: 300%;
+	overflow: hidden;
+	z-index: 1101;
+}
+.front{
+	z-index: 1110;
+	opacity:1;
+	boarder:1px;
+	margin: auto;
+}
+.show{
+	position: relative;
+	max-width: 1200px;
+	max-height: 800px;
+	overflow: auto;
 }
 </style>
 <!-- <script src="jquery-3.3.1.min.js"></script> -->
@@ -143,7 +173,12 @@ input {
 			</div>
 		</div>
 
-
+		<ul class="milabox-attachments clearfix uploadedList"></ul>
+		
+		<div class='popup back' style="display:none;"></div>
+			<div id="popup_front" class='popup front' style="display:none;">
+			<img id="popup_img">
+		</div>	
 
 		<!-- <div class="box-footer">
 		<button type="submit" class="btn btn-warining modifyBtn">MODIFY</button>
@@ -227,6 +262,9 @@ input {
 	</div>
  -->
 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  			crossorigin="anonymous"></script>
 	
 	
 
@@ -258,6 +296,9 @@ input {
 	</script>
 
 
+<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>	
+		
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
 <li class="replyLi" data-rno={{rno}}>
@@ -276,6 +317,18 @@ input {
 </li>
 {{/each}}
 </script>
+
+<script id="templateAttach" type="text/x-handlebars-template">
+<li data-src='{{fullName}}'>
+	<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}"
+alt="Attachment"></span>
+	<div class="mailbox-attachment-info">
+	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+	</span>
+	</div>
+</li>
+</script>
+
 <script>
 
 Handlebars.registerHelper("prettifyDate", function(timeValue){
@@ -331,13 +384,13 @@ var printData = function(replyArr, target, templateObject){
 			if ($(".timeline").size() > 1) {
 				return;
 			}
-			getPage("/replies/" + bno + "/1");
+			getPage("replies/" + bno + "/1");
 		});
 
 		$(".pagination").on("click", "li a", function(event) {
 			event.preventDefault();
 			replyPage = $(this).attr("href");
-			getPage("/replies/" + bno + "/" + replyPage);
+			getPage("replies/" + bno + "/" + replyPage);
 		});
 
 		$("#replyAddBtn").on("click", function() {
@@ -352,7 +405,7 @@ var printData = function(replyArr, target, templateObject){
 
 			$.ajax({
 				type : 'post',
-				url : '/replies/',
+				url : '/sboard/replies',
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "POST"
@@ -376,6 +429,22 @@ var printData = function(replyArr, target, templateObject){
 			});
 		});
 		
+		
+		var bno = ${bo.bno};
+		var template = Handlebars.compile($("#templateAttach").html());
+		
+		$.getJSON("/sboard/getAttach/"+ bno, function(list){
+			$(list).each(function(){
+				
+				var fileInfo = getFileInfo(this);
+				
+				var html = template(fileInfo);
+				
+				$(".uploadedList").append(html);
+				
+			});
+		});
+		
 /* $(".timeline").on("click", ".replyLi", function(event){
 	
 	var reply = $(this);
@@ -385,6 +454,50 @@ var printData = function(replyArr, target, templateObject){
 	
 });		
 	 */	
+	 $(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
+		
+		 var fileLink = $(this).attr("href");
+		 
+		 if(checkImageType(fileLink)){
+			 
+			 event.preventDefault();
+			 
+			 var imgTag = $("#popup_img");
+			 imgTag.attr("src", fileLink);
+			 
+			 console.log(imgTag.attr("src"));
+			 
+			 $(".popup").show('slow');
+			 imgTag.addClass("show");	 
+		 }
+	 });
+	 
+	 $("#popup_img").on("click", function(){
+		
+		 $(".popup").hide('slow');
+	 });
+	 
+	 $("#removeBtn").on("click", function(){
+		
+		 var replyCnt = $("replycntSmall").html().replace(/[^0~9]/g,"");
+		 
+		 if(replyCnt > 0){
+			 alert("댓글이 달린 게시물을 삭제할 수 없습니다.");
+			 return;
+		 }
+		 var arr = [];
+		 $(".uploadedList li").each(function(index){
+			 arr.push($(this).attr("data-src"));
+		 });
+		 
+		 if(arr.length > 0){
+			 $.post("/deleteAllFiles", {files:arr}, function(){
+				 
+			 });
+		 }
+		 formObj.attr("action", "/sboard/remove");
+		 formObj.submit();
+	 });
 		
 </script>
 </body>

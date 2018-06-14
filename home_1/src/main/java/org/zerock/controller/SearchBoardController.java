@@ -1,15 +1,18 @@
 package org.zerock.controller;
 
+import java.awt.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
-import org.zerock.domain.Criteria;
 import org.zerock.domain.PageMaker;
 import org.zerock.domain.SearchCriteria;
 import org.zerock.persistence.BoardMapper;
@@ -106,10 +109,19 @@ public class SearchBoardController {
 			log.info("regist post ...............");
 			log.info(vo.toString());
 			
-			mapper.regist(vo);
+			mapper.update(vo);
 			
 			rttr.addFlashAttribute("msg", "SUCCESS");
 			
 			return "redirect:/sboard/list";
 		}
+		
+		@RequestMapping("getAttach/{bno}")
+		@ResponseBody
+		public String getAttach(@PathVariable("bno")Integer bno)throws Exception{
+			
+			return mapper.getAttach(bno);
+			
+		}
+		
 }

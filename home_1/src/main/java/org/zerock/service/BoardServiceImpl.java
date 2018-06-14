@@ -146,7 +146,58 @@ public class BoardServiceImpl implements BoardService {
 		mapper.addAttach(fullName);
 		
 	}
+
+	@Override
+	public String getAttach(Integer bno) throws Exception {
+		
+		return mapper.getAttach(bno);
+	}
+
+	@Override
+	public void deleteAttach(Integer bno) throws Exception {
+		
+		mapper.deleteAttach(bno);
+		
+	}
+
+	@Override
+	public void replaceAttach(String fullName, Integer bno) throws Exception {
 	
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("bno", bno);
+		paramMap.put("fullName", fullName);
+		
+		mapper.replaceAttach(fullName, bno);
+	}
+	
+	@Transactional
+	@Override
+	public void remove(Integer bno) throws Exception {
+		
+		mapper.deleteAttach(bno);
+		mapper.delete(bno);
+		
+	}
+
+	@Override
+	public void modify(BoardVO vo) throws Exception {
+		
+		mapper.update(vo);
+		
+		Integer bno = vo.getBno();
+		
+		mapper.deleteAttach(bno);
+		
+		String[] files = vo.getFiles();
+		
+		if(files == null) {
+			return;
+		}
+		for(String fileName : files) {
+			mapper.replaceAttach(fileName, bno);
+		}
+	}
 	
 	
 	

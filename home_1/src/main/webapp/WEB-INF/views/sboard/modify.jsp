@@ -12,25 +12,66 @@
   crossorigin="anonymous"></script>
 
 <style>
-
-.form-group{
+/* 
+ .form-group{
 
 	position: relative;
-	color: black;
-	/* background-color: yellow;
-	height: 100px; */
-	width: 1700px;
-	/* 	background-position: center; */
-	margin: 15px 130px;
+	top: 40px;
+	
+	 background-color: yellow;
+	height: 100px; 
+	 width: 100%; 
+	 	background-position: center; 
+	margin: 15px 30px;
 	padding: 10px 10px 10px 10px;
 	font-family: Arial, Helvetica, sans-serif;
-	/* text-align: justify; */
+	 text-align: justify; 
+	justify-content: center; 
+} */
+
+exampleInputBno{
+	padding: 10px 10px;
+	left: 20%;
+}
+.form-bno{
+	justify-content: center;
+	width: 90%;
+	margin: 10px 10px;
+	left: 20%;
+}
+
+exampleInputTitle{
+	padding: 10px 10px;
+}
+.form-title{
+	justify-content: center;
+	width: 90%;
+	margin: 10px 10px;
+}
+
+exmapleInputContent{
+	padding: 10px 10px;
+}
+.form-content{
+	justify-content: center;
+	width: 90%;
+	margin: 10px 10px;
+}
+
+exampleInputWriter{
+	padding: 10px 10px;
+}
+.form-writer{
+	justify-content: center;
+	width: 90%;
+	margin: 10px 10px;
 }
 .box-footer{
 
 	position: absolute;
-	top: 300px;
-	left: 171px; 
+	top: 600px;
+	left: 20%;
+	justify-content: left;
 }
 
 
@@ -48,29 +89,29 @@
 	
 		<div class="box-body">
 			<div class="form-group">
-				<label for="exampleInputEmail1">BNO</label><input type="text"
-					name='bno' class="form-control" value="${bo.bno}"
+				<label for="exampleInputBno">BNO</label><input type="text"
+					name='bno' class="form-bno" value="${bo.bno}"
 					readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label for="exampleInputEmail1">Title</label><input type="text"
-					name='title' class="form-control" value="${bo.title}">
+				<label for="exampleInputTitle">Title</label><input type="text"
+					name='title' class="form-title" value="${bo.title}">
 			</div>
 			<!-- rows="3" -->
 			<div class="form-group"> 
-				<label for="exmapleInputPassword1">Content</label>
-				<textarea class="form-control" name="content" >${bo.content}</textarea>
+				<label for="exmapleInputContent">Content</label>
+				<textarea class="form-content" name="content" >${bo.content}</textarea>
 			</div>
 			<div class="form-group">
-				<label for="exampleInputEmail1">Writer</label><input type="text"
-					name="writer" class="form-control" value="${bo.writer}">
+				<label for="exampleInputWriter">Writer</label><input type="text"
+					name="writer" class="form-writer" value="${bo.writer}">
 			</div>
 		</div>
 	</form>
 
 <div class="box-footer">
 		<button type="submit" class="btn btn-primary">SAVE</button>
-		<button type="submit"class="btn btn-warning">CANCEL</button>
+		<button type="submit" class="btn btn-warning">CANCEL</button>
 	</div>
 
 
