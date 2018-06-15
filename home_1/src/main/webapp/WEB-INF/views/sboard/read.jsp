@@ -102,11 +102,12 @@ input {
 	top: 530px;
 }
 .replyLi{
+	position: 
 	color: white;
 }
 
 .bg-green{
-	
+	color: white;
 }
 
 .popup{
@@ -132,6 +133,19 @@ input {
 	max-height: 800px;
 	overflow: auto;
 }
+
+
+.AddBtn-box-footer{
+	position: absolute;
+	top : 90%;
+	left : 12%;
+}
+.btn btn-AddBtn{
+	position: absolute;
+	top: 80%;
+	left: 33%;	
+} 
+
 </style>
 <!-- <script src="jquery-3.3.1.min.js"></script> -->
 <title>게시글 상세보기 페이지 입니다</title>
@@ -205,10 +219,12 @@ input {
 		<!-- timeline time label -->
 		<li class="time-label" id="repliesDiv">
 		<span class="bg-green">
-			Replies List <small id="replycntSmall"> [${bo.replycnt}]</small>
+			Replies List 
+		<small id="replycntSmall"> [${bo.replycnt}]</small>
 			
 		</span></li>
 	</ul>
+	
 	<div class="text-center">
 		<ul id="pagination" class="pagination pagination-sm no-margin ">
 
@@ -230,8 +246,8 @@ input {
 						placeholder="REPLY TEXT" id="newReplyText">
 				</div>
 				<!-- /.box-body -->
-				<div class="box-footer">
-					<button type="submit" class="btn btn-primary" id="replyAddBtn">ADD
+				<div class="AddBtn-box-footer">
+					<button type="submit" class="btn btn-AddBtn" id="replyAddBtn">ADD
 						REPLY</button>
 				</div>
 			</div>
@@ -261,6 +277,40 @@ input {
 		</div>
 	</div>
  -->
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>	
+		
+<script id="template" type="text/x-handlebars-template">
+{{#each .}}
+<li class="replyLi" data-rno={{rno}}>
+<i class="fa fa-comments bg-blue"></i>
+	<div class="timeline-item">
+		<span class="time">
+			<i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
+		</span>
+		<h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
+		<div class="timeline-body">{{replytext}}</div>
+			<div class="timeline-footer">
+				<a class="btn btn-primary btn-xs"
+					data-toggle="modal" data-target="#modifyModal">Modify</a>
+			</div>
+		</div>
+</li>
+{{/each}}
+</script>
+
+<script id="templateAttach" type="text/x-handlebars-template">
+<li data-src='{{fullname}}'>
+	<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}"
+alt="Attachment"></span>
+	<div class="mailbox-attachment-info">
+	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+	</span>
+	</div>
+</li>
+</script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -296,38 +346,6 @@ input {
 	</script>
 
 
-<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>	
-		
-<script id="template" type="text/x-handlebars-template">
-{{#each .}}
-<li class="replyLi" data-rno={{rno}}>
-<i class="fa fa-comments bg-blue"></i>
-	<div class="timeline-item">
-		<span class="time">
-			<i class="fa fa-clock-o"></i>{{perttifyDate regdate}}
-		</span>
-		<h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
-		<div class="timeline-body">{{replytext}}</div>
-			<div class="timeline-footer">
-				<a class="btn btn-primary btn-xs"
-					data-toggle="modal" data-target="#modifyModal">Modify</a>
-			</div>
-		</div>
-</li>
-{{/each}}
-</script>
-
-<script id="templateAttach" type="text/x-handlebars-template">
-<li data-src='{{fullName}}'>
-	<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}"
-alt="Attachment"></span>
-	<div class="mailbox-attachment-info">
-	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-	</span>
-	</div>
-</li>
-</script>
 
 <script>
 
@@ -346,16 +364,18 @@ var printData = function(replyArr, target, templateObject){
 		var html = template(replyArr);
 		$(".replyLi").remove();
 		target.after(html);
+		
+		alert("AAAAAAAAAA");
 }
 
 		var bno = ${bo.bno};
 		var replyPage = 1;
 
 		function getPage(pageInfo) {
-
+			
 			$.getJSON(pageInfo, function(data) {
 				printData(data.list, $("#repliesDiv"), $("#template"));
-				printPaging(data.pageMaker, $(".pagination"));
+				printPaging(data.pageMaker, $("#pagination"));
 
 				$("#modifyModal").modal("hide");
 				$("#replycntSmall").html("[ " + data.pageMaker.totalCount +  " ]");
@@ -381,21 +401,21 @@ var printData = function(replyArr, target, templateObject){
 		};
 
 		$("#repliesDiv").on("click", function() {
-			if ($(".timeline").size() > 1) {
+			if ($(".timeline li").size() > 1) {
 				return;
 			}
-			getPage("replies/" + bno + "/1");
+			getPage("/replies/" + bno + "/1");
 		});
 
-		$(".pagination").on("click", "li a", function(event) {
+		$("#pagination").on("click", "li a", function(event) {
 			event.preventDefault();
 			replyPage = $(this).attr("href");
-			getPage("replies/" + bno + "/" + replyPage);
+			getPage("/replies/" + bno + "/" + replyPage);
 		});
 
 		$("#replyAddBtn").on("click", function() {
-			var replyObj = $("#newReplyWriter");
-			var replytextObj = $("#newReplyText");
+			var replyObj = $("#newReplyWriter");	// newReplyWriter
+		//	var replytextObj = $("#newReplyText");	// newReplyText
 			var replyerObj = $(".reUser");
 			var replytextObj = $(".reText");
 
@@ -405,7 +425,7 @@ var printData = function(replyArr, target, templateObject){
 
 			$.ajax({
 				type : 'post',
-				url : '/sboard/replies',
+				url : '/replies/',
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "POST"
@@ -422,8 +442,8 @@ var printData = function(replyArr, target, templateObject){
 						alert("등록 되었습니다");
 						replyPage = 1;
 						getPage("/replies/" + bno + "/" + replyPage);
-						replyerObj.val("");
-						replytextObj.val("");
+						/* replyerObj.val("");
+						replytextObj.val(""); */
 					}
 				}
 			});
@@ -445,15 +465,15 @@ var printData = function(replyArr, target, templateObject){
 			});
 		});
 		
-/* $(".timeline").on("click", ".replyLi", function(event){
+/*  $(".timeline").on("click", ".replyLi", function(event){
 	
 	var reply = $(this);
 	
 	$("#replytext").val(reply.find('.timeline-body').text());
 	$(".modal-title").html(reply.attr("data-rno"));
 	
-});		
-	 */	
+});		 */
+	 	
 	 $(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
 		
 		 var fileLink = $(this).attr("href");

@@ -11,21 +11,21 @@ function getFileInfo(fullName){
 	
 	var fileLink;
 	
-	if(checkImageType(fullName)){
-		imgsrc="/displayFile?fileName="+fullName;
-		fileLink = fullName.substr(14);
+	if(checkImageType(fullname)){
+		imgsrc="/displayFile?fileName="+fullname;
+		fileLink = fullname.substr(14);
 		
-		var front = fullName.substr(0,12); // 	/2018/06/14/
-		var end = fullName.substr(14); 
+		var front = fullname.substr(0,12); // 	/2018/06/14/
+		var end = fullname.substr(14); 
 		
 		getLink = "/displayFile?fileName="+front + end;
 		
 	}else{
 		imgsrc= "/resources/dist/img/file.png";
-		fileLink= fullName.substr(12);
-		getLink = "/displayFile?fileName=" + fullName;
+		fileLink= fullname.substr(12);
+		getLink = "/displayFile?fileName=" + fullname;
 	}
 	fileName= fileLink.substr(fileLink.indexOf("_")+1);
 	
-	return {fileName:fileName, imgsrc:imgsrc, getLink:getLink, fullName:fullName};
+	return {fileName:fileName, imgsrc:imgsrc, getLink:getLink, fullname:fullname};
 }

@@ -141,9 +141,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void addAttach(String fullName) throws Exception {
+	public void addAttach(String fullname) throws Exception {
 		
-		mapper.addAttach(fullName);
+		
+		log.info("addAttach 메소드의 fullname 입니다 " + fullname);
+		mapper.addAttach(fullname);
 		
 	}
 

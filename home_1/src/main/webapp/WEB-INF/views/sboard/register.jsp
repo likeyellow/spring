@@ -7,6 +7,8 @@
 <link href="/resources/throughout/css/slidertron.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="/resources/throughout/css/style.css" rel="stylesheet" type="text/css" media="screen" />
 
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+
 <title>Insert title here</title>
 
 <style>
@@ -111,7 +113,9 @@ h1{
 .btn-primary{
 	position: absolute;
 	left: 2em;
-	margin: 30px 0px;
+	top: 52em;
+	margin: 10px 0px;
+	background-color: white;
 }
 </style>
 </head>
@@ -157,14 +161,14 @@ h1{
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>	
 	
-	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	
 	
 	<script id="template" type="text/x-handlebars-template">
 	<li>
 		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
 			<div class="mailbox-attachment-info">
 				<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-				<a href="{{fullName}}"
+				<a href="{{fullname}}"
 					class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
 			</div>
 	</li>
@@ -179,17 +183,26 @@ h1{
 	var template = Handlebars.compile($("#template").html());
 	
 	$(".fileDrop").on("dragenter dragover", function(event){
+		//alert(event);
+		// console.log(event);
+		
 		event.preventDefault();
 	});
 	
 	$(".fileDrop").on("drop", function(event){
+		
+		alert("AAAAAAA");
 		event.preventDefault();
+		console.log(event);
 		
 		var files = event.originalEvent.dataTransfer.files;
+		console.log(files);
 		
 		var file = files[0];
+		console.log(file);
 		
 		var formData = new FormData();
+		console.log(formData);
 		
 		formData.append("file", file);
 		
@@ -199,10 +212,12 @@ h1{
 			dataType: 'text',
 			processData: false,
 			contentType: false,
-			type: 'post',
+			type: 'POST',
 			success: function(data){
 				
 				var fileInfo = getFileInfo(data);
+				
+				console.log(fileInfo);
 				
 				var html = template(fileInfo);
 				

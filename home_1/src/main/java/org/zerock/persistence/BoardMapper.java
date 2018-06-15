@@ -80,7 +80,7 @@ public interface BoardMapper {
 	
 	public int updateViewCnt(Integer bno) throws Exception;
 	
-	public void addAttach(String fullName) throws Exception;
+	public void addAttach(String fullname) throws Exception;
 	
 	public String getAttach(Integer bno) throws Exception;	// ??? return type 이상함. 이상해......... >.<
 	

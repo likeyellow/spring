@@ -179,7 +179,7 @@
 </update>
 
 <insert id="addAttach">
-	insert into tbl_attach(fullName, bno) values(#{fullName}, Last_INSERT_ID())
+	insert into tbl_attach(fullname, bno) values(#{fullname}, LAST_INSERT_ID())
 </insert>
 
 <select id="getAttach" resultType="string">

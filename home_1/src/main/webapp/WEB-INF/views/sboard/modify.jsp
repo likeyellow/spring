@@ -107,25 +107,39 @@ exampleInputWriter{
 					name="writer" class="form-writer" value="${bo.writer}">
 			</div>
 		</div>
-	</form>
 
-<div class="box-footer">
+
+	<div class="box-footer">
 		<button type="submit" class="btn btn-primary">SAVE</button>
 		<button type="submit" class="btn btn-warning">CANCEL</button>
 	</div>
-
+</form>
 
 	<script>
-		$(document).ready(function() {
+		$(document).ready(function() { // form role="form"
 			var formObj = $("form[role='form']");
 			console.log(formObj);
 
 			$(".btn-warning").on("click", function() {
-				self.location = "/sboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}"
-					+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
+				
+				
+				console.log(formObj.val());
+				
+				 self.location = "/sboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}"
+					+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";  
+					
+				
+					alert(${cri.perPageNum});	
+				
 			});
 
 			$(".btn-primary").on("click", function() {
+				
+				alert("저장버튼" + formObj.val());
+				
+				console.log(formObj.val());
+				
+				
 				formObj.submit();
 			});
 		});
