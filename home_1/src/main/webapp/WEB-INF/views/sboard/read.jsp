@@ -187,7 +187,7 @@ input {
 			</div>
 		</div>
 
-		<ul class="milabox-attachments clearfix uploadedList"></ul>
+		
 		
 		<div class='popup back' style="display:none;"></div>
 			<div id="popup_front" class='popup front' style="display:none;">
@@ -201,10 +201,13 @@ input {
 	</div> -->
 	</form>
 
-
+	<ul class="milabox-attachments clearfix uploadedList">
+	</ul>
+	<c:if test="${login.uid ==bo.writer}">
 	<div class="box-footer">
 		<button type="submit" class="btn btn-warining modifyBtn">MODIFY</button>
 		<button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
+	</c:if>	
 		<button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
 	</div>
 	

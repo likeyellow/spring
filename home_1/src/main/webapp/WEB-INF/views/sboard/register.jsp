@@ -135,8 +135,8 @@ h1{
 		
 			<div class="form-group">
 				<!-- <label for="exampleInputWriter">Writer</label> -->
-				<input type="text" name="writer" class="form-control2" placeholder="Enter Writer">
-			</div>
+				<input type="text" name="writer" class="form-control2" value="${login.uid}" placeholder="Enter Writer">
+			</div>````
 			
 			<div class="form-group">
 				<!-- <label for="exampleInputFile">File DROP Here</label>  -->
