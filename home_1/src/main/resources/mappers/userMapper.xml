@@ -8,6 +8,12 @@
 		select uid, upw, uname from tbl_user where uid = #{uid} and upw = #{upw}
 	</select>
 
+	<update id="keepLogin">
+		update tbl_user set sessionkey = #{sessionId}, sessionlimit = #{next} where uid = #{uid}
+	</update>
 
+	<select id="checkUserWithSessionKey" resultType="org.zerock.domain.UserVO">
+		select * from tbl_user where sessionkey = #{value} and sessionlimit > now()
+	</select>
 
 </mapper>				

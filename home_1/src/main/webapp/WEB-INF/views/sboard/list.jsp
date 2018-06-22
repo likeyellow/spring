@@ -142,7 +142,7 @@
 		<script type="text/javascript">
 			$('#foobar').slidertron({
 				viewerSelector : '.viewer',
-				reelSelector : '.viewer .reel',
+				reelSelector : '.viewer .reel',         
 				slidesSelector : '.viewer .reel .slide',
 				navPreviousSelector : '.previous',
 				navNextSelector : '.next',

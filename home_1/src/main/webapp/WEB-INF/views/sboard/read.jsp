@@ -140,11 +140,19 @@ input {
 	top : 90%;
 	left : 12%;
 }
-.btn btn-AddBtn{
+/* .btn btn-AddBtn{
 	position: absolute;
 	top: 80%;
 	left: 33%;	
-} 
+}  */
+#replyAddBtn{
+	position: absolute;
+	top: 13em;
+	left: 65em;	
+}
+.add-reply{
+	border: dotted 1px gray;
+}
 
 </style>
 <!-- <script src="jquery-3.3.1.min.js"></script> -->
@@ -203,8 +211,10 @@ input {
 
 	<ul class="milabox-attachments clearfix uploadedList">
 	</ul>
-	<c:if test="${login.uid ==bo.writer}">
+	
 	<div class="box-footer">
+	<c:if test="${login.uid ==bo.writer}">
+	
 		<button type="submit" class="btn btn-warining modifyBtn">MODIFY</button>
 		<button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
 	</c:if>	
@@ -238,13 +248,20 @@ input {
 		<div class="col-md-12">
 
 			<div class="box box-success">
+			
+			<div class="add-reply">
+			
 				<div class="box-header">
+				
+				
 					<h3 class="box-title">ADD NEW REPLY</h3>
 				</div>
+			<c:if test="${not empty login}">	
 				<div class="box-body">
 					<label for="newReplyWriter">Writer</label> <input
 						class="form-control reUser" type="text" placeholder="USER ID"
-						id="newReplyWriter"><label for="newReplyText">ReplyText</label>
+						id="newReplyWriter" value="${login.uid}" readonly="readonly">
+						<label for="newReplyText">ReplyText</label>
 					<input class="form-control reText" type="text"
 						placeholder="REPLY TEXT" id="newReplyText">
 				</div>
@@ -253,6 +270,16 @@ input {
 					<button type="submit" class="btn btn-AddBtn" id="replyAddBtn">ADD
 						REPLY</button>
 				</div>
+			</c:if>	
+			
+			</div>
+			
+			<c:if test="${empty login}">
+				<div class="box-body">
+					<div><a href="javascript:goLogin();">Login Please</a></div>
+				</div>
+			</c:if>
+			
 			</div>
 		</div>
 	</div>
@@ -296,8 +323,10 @@ input {
 		<h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
 		<div class="timeline-body">{{replytext}}</div>
 			<div class="timeline-footer">
+			{{#eqReplyer replyer}}
 				<a class="btn btn-primary btn-xs"
 					data-toggle="modal" data-target="#modifyModal">Modify</a>
+					{{/eqReplyer}}
 			</div>
 		</div>
 </li>
@@ -314,6 +343,7 @@ alt="Attachment"></span>
 	</div>
 </li>
 </script>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -351,6 +381,18 @@ alt="Attachment"></span>
 
 
 <script>
+
+Handlebars.registerHelper("eqReplyer", function(replyer, block){
+	var accum = "";
+	if(replyer == '${login.uid}'){
+		
+		accum += block.fn();
+	}
+	return accum;
+});
+
+
+
 
 Handlebars.registerHelper("prettifyDate", function(timeValue){
 	var dateObj = new Date(timeValue);
@@ -523,5 +565,6 @@ var printData = function(replyArr, target, templateObject){
 	 });
 		
 </script>
+
 </body>
 </html>
